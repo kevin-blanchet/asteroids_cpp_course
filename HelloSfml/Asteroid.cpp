@@ -18,8 +18,9 @@ Asteroid::~Asteroid()
 void Asteroid::updatePosition()
 {
 	float pi = 3.14159265;
+	float radAngularDirection = this->angularDirection * pi / 180;
 	this->shape.rotate(this->rotateSpeed);
-	this->shape.move(sin(this->angularDirection * pi / 180) * moveSpeed, cos(this->angularDirection * pi / 180) * moveSpeed);
+	this->shape.move(sin(radAngularDirection) * moveSpeed, cos(radAngularDirection) * moveSpeed);
 }
 
 void Asteroid::updateWindowBounds(const sf::RenderTarget* target)
