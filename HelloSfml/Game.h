@@ -6,6 +6,8 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 
+#include "Player.h"
+
 /*
 * Game engine
 */
@@ -26,6 +28,8 @@ private:
 	sf::RenderWindow* window; //On créé un pointeur pour avoir plus de controle
 	sf::Event ev;
 	bool endGame;
+
+	Player player;
 
 	void initVariables();
 	void initWindow();
