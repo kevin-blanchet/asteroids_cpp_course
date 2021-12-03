@@ -1,34 +1,13 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <iostream>
+#include "Game.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(640, 480), "Asteroids", sf::Style::Titlebar | sf::Style::Close);
-    sf::Event ev;
+    Game game;
 
-    while (window.isOpen())
+    while (game.isRunning())
     {
-        while (window.pollEvent(ev))
-        {
-            switch (ev.type)
-            {
-            case sf::Event::Closed:
-                window.close();
-                break;
-            case sf::Event::KeyPressed:
-                if (ev.key.code == sf::Keyboard::Escape)
-                    window.close();
-                break;
-            default:
-                break;
-            }
-        }
-
-        window.clear();
-        window.display();
+        game.update();
+        game.render();
     }
 
     return 0;
