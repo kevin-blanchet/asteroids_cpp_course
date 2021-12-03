@@ -4,9 +4,11 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
-#include <iostream>
+
+#include <vector>
 
 #include "Player.h"
+#include "Asteroid.h"
 
 /*
 * Game engine
@@ -30,8 +32,13 @@ private:
 	bool endGame;
 
 	Player player;
+	std::vector<Asteroid> asteroids;
 
 	void initVariables();
 	void initWindow();
+
+	void spawnAsteroids(int n = 8);
+	void renderAsteroids(sf::RenderTarget* target);
+	void updateAsteroids(const sf::RenderTarget* target);
 };
 

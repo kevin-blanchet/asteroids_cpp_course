@@ -36,13 +36,16 @@ void Game::pollEvents()
 void Game::update()
 {
     this->pollEvents();
+
     this->player.update(this->window);
+    this->updateAsteroids(this->window);
 }
 void Game::render() 
 {
     this->window->clear();
 
     this->player.render(this->window);
+    this->renderAsteroids(this->window);
 
     this->window->display();
 }
@@ -51,6 +54,8 @@ void Game::initVariables()
 {
 	this->window = nullptr;
     this->endGame = false;
+
+    this->spawnAsteroids();
 }
 
 void Game::initWindow()
@@ -59,4 +64,27 @@ void Game::initWindow()
 	this->videoMode.width = 640;
 	this->window = new sf::RenderWindow(this->videoMode, "Asteroids", sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(24);
+}
+
+void Game::spawnAsteroids(int n)
+{
+    // @todo: faire spawn les asteroids sur les bords de l'ecran uniquement
+    for (int i = 0; i < n; i++)
+    {
+        this->asteroids.push_back(Asteroid(static_cast<float>(rand() % 480), static_cast<float>(rand() % 360)));
+    }
+}
+
+void Game::renderAsteroids(sf::RenderTarget* target)
+{
+    for (auto& it : this->asteroids) {
+        it.render(target);
+    }
+}
+
+void Game::updateAsteroids(const sf::RenderTarget* target)
+{
+    for (auto& it : this->asteroids) {
+        it.update(target);
+    }
 }
