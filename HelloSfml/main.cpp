@@ -1,26 +1,33 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
-#include "Vec2f.h"
-#include "Circle.h"
-
 
 int main()
 {
-    Shape* myCircle = new Circle( Vec2f(0,0), 0.0f);
-    sf::RenderWindow window(sf::VideoMode(200, 200), "Asteroids (not)");
+    sf::RenderWindow window(sf::VideoMode(640, 480), "Asteroids", sf::Style::Titlebar | sf::Style::Close);
+    sf::Event ev;
 
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        while (window.pollEvent(ev))
         {
-            if (event.type == sf::Event::Closed)
+            switch (ev.type)
+            {
+            case sf::Event::Closed:
                 window.close();
+                break;
+            case sf::Event::KeyPressed:
+                if (ev.key.code == sf::Keyboard::Escape)
+                    window.close();
+                break;
+            default:
+                break;
+            }
         }
 
         window.clear();
-        //myCircle->show();
-        myCircle->show(window);
         window.display();
     }
 
