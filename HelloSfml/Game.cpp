@@ -28,7 +28,7 @@ void Game::pollEvents()
                 this->window->close();
             break;
         case sf::Event::KeyReleased:
-            if (booltp == false)
+            if (booltp == false && this->ev.key.code == sf::Keyboard::Down)
                 booltp = true;
             break;
         default:
@@ -98,7 +98,7 @@ void Game::updateControls()
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         //shoot bullet on player position
-       // this->bullets.push_back(Bullet(this->player.getPosition().x,this->player.getPosition().y, this->player.getAngularDirection()));
+        //this->bullets.push_back(Bullet(this->player.getPosition().x,this->player.getPosition().y, this->player.getAngularDirection()));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && booltp == true) {
         this->player.teleport(this->window);

@@ -22,7 +22,6 @@ private:
 	float rotateSpeed;
 	float moveSpeed;
 	float size;
-	float angularDirection;
 
 	void initVariables();
 	void initShape();

@@ -30,9 +30,9 @@ void Player::updatePosition()
 	{
 		//calculer x et y selon le sin et cosin du getRotation 
 		float pi = 3.14159265;
-		this->angularDirection = this->shape.getRotation() * -1;
-		float radAngularDirection = this->angularDirection * pi / 180;
-		this->shape.move(sin(radAngularDirection) * moveSpeed * -1, cos(radAngularDirection) * moveSpeed * -1);
+		float angularDirection = - this->shape.getRotation();
+		float radAngularDirection = angularDirection * pi / 180;
+		this->shape.move(-sin(radAngularDirection) * moveSpeed, -cos(radAngularDirection) * moveSpeed);
 	}
 }
 void Player::updateWindowBounds(const sf::RenderTarget* target)
@@ -65,7 +65,6 @@ void Player::initVariables()
 	this->rotateSpeed = 5.f;
 	this->moveSpeed = 5.f;
 	this->size = 10.f;
-	
 }
 
 void Player::initShape()
