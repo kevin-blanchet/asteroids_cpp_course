@@ -29,13 +29,11 @@ void Player::updatePosition()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		//calculer x et y selon le sin et cosin du getRotation 
-		this->shape.move(0.f, -1 * this->moveSpeed);
+		float pi = 3.14159265;
+		this->angularDirection = this->shape.getRotation() * -1;
+		float radAngularDirection = this->angularDirection * pi / 180;
+		this->shape.move(sin(radAngularDirection) * moveSpeed * -1, cos(radAngularDirection) * moveSpeed * -1);
 	}
-	//else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	//{
-	//	this->shape.setPosition({ static_cast<float>(rand() % 480), static_cast<float>(rand() % 360) });
-	//	//this->shape.move( 0.f, 1 * this->moveSpeed );
-	//}
 }
 void Player::updateWindowBounds(const sf::RenderTarget* target)
 {
@@ -67,6 +65,7 @@ void Player::initVariables()
 	this->rotateSpeed = 5.f;
 	this->moveSpeed = 5.f;
 	this->size = 10.f;
+	
 }
 
 void Player::initShape()

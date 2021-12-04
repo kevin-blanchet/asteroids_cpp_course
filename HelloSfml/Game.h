@@ -31,6 +31,8 @@ private:
 	sf::RenderWindow* window; //On créé un pointeur pour avoir plus de controle
 	sf::Event ev;
 	bool endGame;
+	//TODO : A rennomer
+	bool booltp = true;
 
 	Player player;
 	std::vector<Asteroid> asteroids;
