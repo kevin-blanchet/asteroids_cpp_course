@@ -9,6 +9,7 @@
 
 #include "Player.h"
 #include "Asteroid.h"
+#include "Bullet.h"
 
 /*
 * Game engine
@@ -33,12 +34,16 @@ private:
 
 	Player player;
 	std::vector<Asteroid> asteroids;
+	std::vector<Bullet> bullets;
 
 	void initVariables();
 	void initWindow();
 
 	void spawnAsteroids(int n = 8);
+
 	void renderAsteroids(sf::RenderTarget* target);
+
 	void updateAsteroids(const sf::RenderTarget* target);
+	void updateControls();
 };
 

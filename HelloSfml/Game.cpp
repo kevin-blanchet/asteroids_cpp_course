@@ -36,6 +36,7 @@ void Game::pollEvents()
 void Game::update()
 {
     this->pollEvents();
+    this->updateControls();
 
     this->player.update(this->window);
     this->updateAsteroids(this->window);
@@ -86,5 +87,14 @@ void Game::updateAsteroids(const sf::RenderTarget* target)
 {
     for (auto& it : this->asteroids) {
         it.update(target);
+    }
+}
+
+void Game::updateControls()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        //shoot bullet on player position
+        this->bullets.push_back(Bullet(this->player.getPosition().x,this->player.getPosition().y, this->player.getAngularDirection()));
     }
 }
