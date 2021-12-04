@@ -31,10 +31,11 @@ void Player::updatePosition()
 		//calculer x et y selon le sin et cosin du getRotation 
 		this->shape.move(0.f, -1 * this->moveSpeed);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		this->shape.move( 0.f, 1 * this->moveSpeed );
-	}
+	//else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	//{
+	//	this->shape.setPosition({ static_cast<float>(rand() % 480), static_cast<float>(rand() % 360) });
+	//	//this->shape.move( 0.f, 1 * this->moveSpeed );
+	//}
 }
 void Player::updateWindowBounds(const sf::RenderTarget* target)
 {
@@ -77,4 +78,8 @@ void Player::initShape()
 	this->shape.setFillColor(sf::Color::Transparent);
 	this->shape.setOutlineColor(sf::Color::White);
 	this->shape.setOutlineThickness(1.f);
+}
+
+void Player::teleport(const sf::RenderTarget* target) {
+	this->shape.setPosition({ static_cast<float>(rand() % target->getSize().x), static_cast<float>(rand() % target->getSize().y) });
 }

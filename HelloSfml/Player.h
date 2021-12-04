@@ -15,6 +15,8 @@ public:
 	void updateWindowBounds(const sf::RenderTarget* target);
 	void update(const sf::RenderTarget* target);
 	void render(sf::RenderTarget* target);
+	void teleport(const sf::RenderTarget* target);
+
 private:
 	sf::CircleShape shape;
 	float rotateSpeed;
