@@ -83,3 +83,13 @@ void Player::initShape()
 void Player::teleport(const sf::RenderTarget* target) {
 	this->shape.setPosition({ static_cast<float>(rand() % target->getSize().x), static_cast<float>(rand() % target->getSize().y) });
 }
+
+const sf::Vector2f Player::getPosition() const
+{
+	return this->shape.getPosition();
+}
+
+const float Player::getAngularDirection() const
+{
+	return this->shape.getRotation();
+}

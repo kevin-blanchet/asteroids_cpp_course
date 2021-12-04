@@ -31,7 +31,7 @@ sf::FloatRect Bullet::getBounds()
 
 void Bullet::initVariables()
 {
-	this->size = .51f;
+	this->size = 1.f;
 	this->moveSpeed = 2.f;
 }
 

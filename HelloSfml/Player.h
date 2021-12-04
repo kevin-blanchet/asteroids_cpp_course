@@ -11,11 +11,14 @@ public:
 	Player(float x = 0.f, float y = 0.f);
 	virtual ~Player();
 
-	void updatePosition();
-	void updateWindowBounds(const sf::RenderTarget* target);
 	void update(const sf::RenderTarget* target);
+
 	void render(sf::RenderTarget* target);
+
 	void teleport(const sf::RenderTarget* target);
+
+	const sf::Vector2f getPosition() const;
+	const float getAngularDirection() const;
 
 private:
 	sf::CircleShape shape;
@@ -25,5 +28,8 @@ private:
 
 	void initVariables();
 	void initShape();
+
+	void updatePosition();
+	void updateWindowBounds(const sf::RenderTarget* target);
 };
 

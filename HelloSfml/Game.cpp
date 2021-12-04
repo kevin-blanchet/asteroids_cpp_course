@@ -40,6 +40,7 @@ void Game::update()
 
     this->player.update(this->window);
     this->updateAsteroids(this->window);
+    this->updateBullets(this->window);
 }
 void Game::render() 
 {
@@ -47,6 +48,7 @@ void Game::render()
 
     this->player.render(this->window);
     this->renderAsteroids(this->window);
+    this->renderBullets(this->window);
 
     this->window->display();
 }
@@ -83,9 +85,23 @@ void Game::renderAsteroids(sf::RenderTarget* target)
     }
 }
 
+void Game::renderBullets(sf::RenderTarget* target)
+{
+    for (auto& it : this->bullets) {
+        it.render(target);
+    }
+}
+
 void Game::updateAsteroids(const sf::RenderTarget* target)
 {
     for (auto& it : this->asteroids) {
+        it.update(target);
+    }
+}
+
+void Game::updateBullets(const sf::RenderTarget* target)
+{
+    for (auto& it : this->bullets) {
         it.update(target);
     }
 }
