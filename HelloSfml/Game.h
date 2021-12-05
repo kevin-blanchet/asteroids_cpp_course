@@ -44,8 +44,10 @@ private:
 	void spawnAsteroids(int n = 8);
 
 	void renderAsteroids(sf::RenderTarget* target);
+	void renderBullets(sf::RenderTarget* target);
 
 	void updateAsteroids(const sf::RenderTarget* target);
+	void updateBullets(const sf::RenderTarget* target);
 	void updateControls();
 };
 
