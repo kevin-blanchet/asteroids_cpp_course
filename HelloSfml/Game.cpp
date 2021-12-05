@@ -41,7 +41,6 @@ void Game::pollEvents()
                 break;
             case controlMap::teleport:
                 this->player.teleport();
-                std::cout << "teleport is pressed" << "\n";
                 break;
             case controlMap::shoot:
                 this->shootBulletOnPlayerPosition();
@@ -62,7 +61,6 @@ void Game::pollEvents()
                 break;
             case controlMap::teleport:
                 this->player.teleport(false);
-                std::cout << "teleport is released" << "\n";
                 break;
             case controlMap::shoot:
                 //Quand on relache la touche, on peut de nouveau tirer
