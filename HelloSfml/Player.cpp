@@ -107,6 +107,11 @@ const float Player::getAngularDirection() const
 	return this->shape.getRotation();
 }
 
+const sf::FloatRect Player::getGlobalBounds() const
+{
+	return this->shape.getGlobalBounds();
+}
+
 void Player::canShoot(bool canShoot)
 {
 	this->b_canShoot = canShoot;

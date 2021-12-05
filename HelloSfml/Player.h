@@ -18,6 +18,7 @@ public:
 
 	const sf::Vector2f getPosition() const;
 	const float getAngularDirection() const;
+	const sf::FloatRect getGlobalBounds() const;
 
 	bool canShoot();
 	void canShoot(bool isPressed);

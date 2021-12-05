@@ -15,7 +15,7 @@ public:
 
 	void render(sf::RenderTarget* target);
 
-	sf::FloatRect getBounds();
+	const sf::FloatRect getGlobalBounds() const;
 private:
 	sf::CircleShape shape;
 	int angularDirection;

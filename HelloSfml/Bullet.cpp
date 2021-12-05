@@ -24,7 +24,7 @@ void Bullet::render(sf::RenderTarget* target)
 	target->draw(this->shape);
 }
 
-sf::FloatRect Bullet::getBounds()
+const sf::FloatRect Bullet::getGlobalBounds() const
 {
 	return this->shape.getGlobalBounds();
 }

@@ -15,6 +15,11 @@ Asteroid::~Asteroid()
 {
 }
 
+const sf::FloatRect Asteroid::getGlobalBounds() const
+{
+	return this->shape.getGlobalBounds();
+}
+
 void Asteroid::updatePosition()
 {
 	float pi = 3.14159265;
@@ -54,8 +59,6 @@ void Asteroid::initVariables()
 	this->angularDirection = rand() % 360;
 	this->rotateSpeed = static_cast<float>(rand() % 21 - 10);
 	this->moveSpeed = 2.f;
-
-	this->debug = 0;
 }
 
 void Asteroid::initShape()
