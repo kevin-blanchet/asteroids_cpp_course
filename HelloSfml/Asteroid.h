@@ -11,8 +11,8 @@ public:
 	Asteroid(float x = 0.f, float y = 0.f, float size = 50.f);
 	virtual ~Asteroid();
 	
-	void updatePosition();
-	void updateWindowBounds(const sf::RenderTarget* target);
+	const sf::FloatRect getGlobalBounds() const;
+
 	void update(const sf::RenderTarget* target);
 	void render(sf::RenderTarget* target);
 private:
@@ -22,9 +22,10 @@ private:
 	float moveSpeed;
 	float size;
 
-	int debug;
-
 	void initVariables();
 	void initShape();
+
+	void updatePosition();
+	void updateWindowBounds(const sf::RenderTarget* target);
 };
 

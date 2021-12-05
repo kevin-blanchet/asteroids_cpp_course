@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <iostream>
+
 Game::Game()
 {
 	initVariables();
@@ -74,6 +76,7 @@ void Game::pollEvents()
 void Game::update()
 {
     this->pollEvents();
+    this->updateCollisions();
 
     this->player.update(this->window);
     this->updateAsteroids(this->window);
@@ -149,5 +152,30 @@ void Game::updateBullets(const sf::RenderTarget* target)
 {
     for (auto& it : this->bullets) {
         it.update(target);
+    }
+}
+
+void Game::updateCollisions()
+{
+    for (auto asteroidIt = this->asteroids.begin(); asteroidIt != this->asteroids.end();) {
+        bool isAsteroidDestroyed = false;
+        for (auto bulletIt = this->bullets.begin(); bulletIt != this->bullets.end() && !isAsteroidDestroyed;) {
+            if (asteroidIt->getGlobalBounds().intersects(bulletIt->getGlobalBounds())) {
+                bulletIt = this->bullets.erase(bulletIt); //clarifications ?
+                isAsteroidDestroyed = true;
+            }
+            else {
+                bulletIt++;
+            }
+        }
+        if (isAsteroidDestroyed) {
+            asteroidIt = this->asteroids.erase(asteroidIt); //clarifications ?
+        }
+        else {
+            if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds())) {
+                std::cout << "TODO: Player should die";
+            }
+            asteroidIt++;
+        }
     }
 }

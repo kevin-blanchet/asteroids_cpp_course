@@ -58,5 +58,6 @@ private:
 
 	void updateAsteroids(const sf::RenderTarget* target);
 	void updateBullets(const sf::RenderTarget* target);
+	void updateCollisions();
 };
 
