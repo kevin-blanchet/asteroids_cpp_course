@@ -91,7 +91,6 @@ void Player::teleport(bool isPressed)
 {
 	this->isTeleport = (isPressed && this->b_canTeleport);
 	this->b_canTeleport = !isPressed;
-	std::cout << "teleport " << isPressed << "\n";
 }
 
 void Player::teleport(const sf::RenderTarget* target) {
@@ -121,7 +120,6 @@ bool Player::canShoot()
 bool Player::canTeleport()
 {
 	return this->b_canTeleport;
-	std::cout << "canTeleport " << b_canTeleport << "\n";
 }
 
 void Player::forward(bool isPressed)
