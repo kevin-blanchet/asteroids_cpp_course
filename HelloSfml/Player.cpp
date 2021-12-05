@@ -1,7 +1,5 @@
 #include "Player.h"
 
-#include <iostream>
-
 Player::Player(float x, float y)
 {
 	this->shape.setPosition({ x,y });

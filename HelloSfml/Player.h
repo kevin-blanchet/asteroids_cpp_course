@@ -44,7 +44,6 @@ private:
 	bool isTurnLeft;
 	bool isTurnRight;
 	bool isForward;
-	
 
 	void initVariables();
 	void initShape();

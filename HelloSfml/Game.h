@@ -6,7 +6,6 @@
 #include <SFML/Audio.hpp>
 
 #include <vector>
-#include <map>
 
 #include "Player.h"
 #include "Asteroid.h"
