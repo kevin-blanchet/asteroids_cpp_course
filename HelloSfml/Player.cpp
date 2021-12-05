@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include <iostream>
+
 Player::Player(float x, float y)
 {
 	this->shape.setPosition({ x,y });
@@ -12,27 +14,29 @@ Player::~Player()
 {
 }
 
-/**
-	@todo: calculer x et y selon le sin et cosin du getRotation (lors des appuis sur fleche du haut et fleche du bas)
-*/
-void Player::updatePosition()
+void Player::updatePosition(const sf::RenderTarget* target)
 {
-	//Keyboard input (will be replaced?)
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
-	{
-		this->shape.rotate(-1 * this->rotateSpeed);
+	if (this->isTeleport) {
+		this->teleport(target);
+		this->isTeleport = false;
 	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) 
-	{
-		this->shape.rotate(1 * this->rotateSpeed);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		//calculer x et y selon le sin et cosin du getRotation 
-		float pi = 3.14159265;
-		float angularDirection = - this->shape.getRotation();
-		float radAngularDirection = angularDirection * pi / 180;
-		this->shape.move(-sin(radAngularDirection) * moveSpeed, -cos(radAngularDirection) * moveSpeed);
+	else {
+		if (this->isTurnLeft)
+		{
+			this->shape.rotate(-1 * this->rotateSpeed);
+		}
+		else if (this->isTurnRight)
+		{
+			this->shape.rotate(1 * this->rotateSpeed);
+		}
+		if (this->isForward)
+		{
+			//calculer x et y selon le sin et cosin du getRotation 
+			float pi = 3.14159265;
+			float angularDirection = -this->shape.getRotation();
+			float radAngularDirection = angularDirection * pi / 180;
+			this->shape.move(-sin(radAngularDirection) * moveSpeed, -cos(radAngularDirection) * moveSpeed);
+		}
 	}
 }
 void Player::updateWindowBounds(const sf::RenderTarget* target)
@@ -51,7 +55,7 @@ void Player::updateWindowBounds(const sf::RenderTarget* target)
 }
 void Player::update(const sf::RenderTarget* target)
 {
-	this->updatePosition();
+	this->updatePosition(target);
 	this->updateWindowBounds(target);
 }
 
@@ -65,6 +69,13 @@ void Player::initVariables()
 	this->rotateSpeed = 5.f;
 	this->moveSpeed = 5.f;
 	this->size = 10.f;
+
+	this->b_canShoot = true;
+	this->b_canTeleport = true;
+	this->isTeleport = false;
+	this->isForward = false;
+	this->isTurnLeft = false;
+	this->isTurnRight = false;
 }
 
 void Player::initShape()
@@ -76,6 +87,13 @@ void Player::initShape()
 	this->shape.setFillColor(sf::Color::Transparent);
 	this->shape.setOutlineColor(sf::Color::White);
 	this->shape.setOutlineThickness(1.f);
+}
+
+void Player::teleport(bool isPressed)
+{
+	this->isTeleport = (isPressed && this->b_canTeleport);
+	this->b_canTeleport = !isPressed;
+	std::cout << "teleport " << isPressed << "\n";
 }
 
 void Player::teleport(const sf::RenderTarget* target) {
@@ -90,4 +108,35 @@ const sf::Vector2f Player::getPosition() const
 const float Player::getAngularDirection() const
 {
 	return this->shape.getRotation();
+}
+
+void Player::canShoot(bool canShoot)
+{
+	this->b_canShoot = canShoot;
+}
+
+bool Player::canShoot()
+{
+	return this->b_canShoot;
+}
+
+bool Player::canTeleport()
+{
+	return this->b_canTeleport;
+	std::cout << "canTeleport " << b_canTeleport << "\n";
+}
+
+void Player::forward(bool isPressed)
+{
+	this->isForward = isPressed;
+}
+
+void Player::turnLeft(bool isPressed)
+{
+	this->isTurnLeft = isPressed;
+}
+
+void Player::turnRight(bool isPressed)
+{
+	this->isTurnRight = isPressed;
 }

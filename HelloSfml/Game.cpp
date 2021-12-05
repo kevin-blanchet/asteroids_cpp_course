@@ -1,4 +1,7 @@
 #include "Game.h"
+
+#include <iostream>
+
 Game::Game()
 {
 	initVariables();
@@ -24,15 +27,50 @@ void Game::pollEvents()
             this->window->close();
             break;
         case sf::Event::KeyPressed:
-            if (this->ev.key.code == sf::Keyboard::Escape)
+            switch (this->ev.key.code)
+            {
+            case controlMap::quit:
                 this->window->close();
+                break;
+            case controlMap::forward:
+                this->player.forward();
+                break;
+            case controlMap::turnLeft:
+                this->player.turnLeft();
+                break;
+            case controlMap::turnRight:
+                this->player.turnRight();
+                break;
+            case controlMap::teleport:
+                this->player.teleport();
+                std::cout << "teleport is pressed" << "\n";
+                break;
+            case controlMap::shoot:
+                this->shootBulletOnPlayerPosition();
+                break;
+            }
             break;
         case sf::Event::KeyReleased:
-            if (booltp == false && this->ev.key.code == sf::Keyboard::Down)
-                booltp = true;
-            break;
-        default:
-            break;
+            switch (this->ev.key.code)
+            {
+            case controlMap::forward:
+                this->player.forward(false);
+                break;
+            case controlMap::turnLeft:
+                this->player.turnLeft(false);
+                break;
+            case controlMap::turnRight:
+                this->player.turnRight(false);
+                break;
+            case controlMap::teleport:
+                this->player.teleport(false);
+                std::cout << "teleport is released" << "\n";
+                break;
+            case controlMap::shoot:
+                //Quand on relache la touche, on peut de nouveau tirer
+                this->player.canShoot(true);
+                break;
+            }
         }
     }
 }
@@ -40,7 +78,6 @@ void Game::pollEvents()
 void Game::update()
 {
     this->pollEvents();
-    this->updateControls();
 
     this->player.update(this->window);
     this->updateAsteroids(this->window);
@@ -81,6 +118,16 @@ void Game::spawnAsteroids(int n)
     }
 }
 
+void Game::shootBulletOnPlayerPosition()
+{
+    if (this->player.canShoot())
+    {
+        //shoot bullet on player position
+        this->bullets.push_back(Bullet(this->player.getPosition().x, this->player.getPosition().y, this->player.getAngularDirection()));
+        this->player.canShoot(false);
+    }
+}
+
 void Game::renderAsteroids(sf::RenderTarget* target)
 {
     for (auto& it : this->asteroids) {
@@ -106,18 +153,5 @@ void Game::updateBullets(const sf::RenderTarget* target)
 {
     for (auto& it : this->bullets) {
         it.update(target);
-    }
-}
-
-void Game::updateControls()
-{
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        //shoot bullet on player position
-        this->bullets.push_back(Bullet(this->player.getPosition().x,this->player.getPosition().y, this->player.getAngularDirection()));
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && booltp == true) {
-        this->player.teleport(this->window);
-        booltp = false;
     }
 }
