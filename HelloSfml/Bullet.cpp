@@ -46,8 +46,8 @@ void Bullet::initShape()
 void Bullet::updatePosition()
 {
 	float pi = 3.14159265;
-	float radAngularDirection = this->angularDirection * pi / 180;
-	this->shape.move(sin(radAngularDirection) * moveSpeed, cos(radAngularDirection) * moveSpeed);
+	float radAngularDirection = - this->angularDirection * pi / 180;
+	this->shape.move(- sin(radAngularDirection) * moveSpeed, - cos(radAngularDirection) * moveSpeed);
 }
 
 void Bullet::updateWindowBounds(const sf::RenderTarget* target)
