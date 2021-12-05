@@ -155,10 +155,20 @@ void Game::updateBullets(const sf::RenderTarget* target)
     }
 }
 
+void Game::splitAsteroids(sf::Vector2f coords, int nbSplit = 2)
+{
+    for (int i = 0; i < nbSplit; i++)
+    {
+        this->temp_asteroids.push_back(Asteroid(coords.x, coords.y, 30.f));
+
+    }
+}
+
 void Game::updateCollisions()
 {
     for (auto asteroidIt = this->asteroids.begin(); asteroidIt != this->asteroids.end();) {
         bool isAsteroidDestroyed = false;
+        bool asteroidAlmostDead = false;
         for (auto bulletIt = this->bullets.begin(); bulletIt != this->bullets.end() && !isAsteroidDestroyed;) {
             if (asteroidIt->getGlobalBounds().intersects(bulletIt->getGlobalBounds())) {
                 bulletIt = this->bullets.erase(bulletIt); //clarifications ?
@@ -169,7 +179,9 @@ void Game::updateCollisions()
             }
         }
         if (isAsteroidDestroyed) {
+            splitAsteroids(asteroidIt->getPosition());
             asteroidIt = this->asteroids.erase(asteroidIt); //clarifications ?
+
         }
         else {
             if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds())) {
@@ -178,4 +190,6 @@ void Game::updateCollisions()
             asteroidIt++;
         }
     }
+    this->asteroids.insert(this->asteroids.end(), this->temp_asteroids.begin(), this->temp_asteroids.end());
+    this->temp_asteroids = std::vector<Asteroid>();
 }

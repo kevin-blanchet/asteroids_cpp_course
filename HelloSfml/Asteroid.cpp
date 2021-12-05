@@ -20,6 +20,11 @@ const sf::FloatRect Asteroid::getGlobalBounds() const
 	return this->shape.getGlobalBounds();
 }
 
+const sf::Vector2f Asteroid::getPosition() const
+{
+	return this->shape.getPosition();
+}
+
 void Asteroid::updatePosition()
 {
 	float pi = 3.14159265;

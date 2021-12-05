@@ -12,6 +12,7 @@ public:
 	virtual ~Asteroid();
 	
 	const sf::FloatRect getGlobalBounds() const;
+	const sf::Vector2f getPosition() const;
 
 	void update(const sf::RenderTarget* target);
 	void render(sf::RenderTarget* target);
@@ -21,6 +22,7 @@ private:
 	int angularDirection;
 	float moveSpeed;
 	float size;
+
 
 	void initVariables();
 	void initShape();
