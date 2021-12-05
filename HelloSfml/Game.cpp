@@ -6,6 +6,8 @@ Game::Game()
 {
 	initVariables();
 	initWindow();
+    this->player = Player((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
+    this->spawnAsteroids();
 }
 
 Game::~Game() {
@@ -97,7 +99,7 @@ void Game::initVariables()
 {
 	this->window = nullptr;
     this->endGame = false;
-    this->spawnAsteroids();
+    this->hitPoint = 4;
 }
 
 void Game::initWindow()
@@ -110,10 +112,15 @@ void Game::initWindow()
 
 void Game::spawnAsteroids(int n)
 {
-    // @todo: faire spawn les asteroids sur les bords de l'ecran uniquement
     for (int i = 0; i < n; i++)
     {
-        this->asteroids.push_back(Asteroid(static_cast<float>(rand() % 480), static_cast<float>(rand() % 360)));
+        float coord = rand() % (this->window->getSize().x + this->window->getSize().y);
+        if (coord > this->window->getSize().x) {
+            this->asteroids.push_back(Asteroid(0, coord - this->window->getSize().x, 30.f));
+        }
+        else {
+            this->asteroids.push_back(Asteroid(coord, 0, 30.f));
+        }
     }
 }
 
@@ -173,9 +180,27 @@ void Game::updateCollisions()
         }
         else {
             if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds())) {
-                std::cout << "TODO: Player should die";
+                this->looseHP();
+                this->player.setPosition((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
+                asteroidIt = this->asteroids.erase(asteroidIt);
             }
-            asteroidIt++;
+            else {
+                asteroidIt++;
+            }
         }
     }
+}
+
+void Game::winHP(int hp)
+{
+    this->hitPoint += hp;
+    std::cout << hitPoint;
+}
+
+void Game::looseHP(int hp) {
+    this->hitPoint -= hp;
+    std::cout << hitPoint;
+
+    if (this->hitPoint <= 0)
+        std::cout << "youdie";
 }
