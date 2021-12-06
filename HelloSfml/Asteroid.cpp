@@ -2,12 +2,12 @@
 #include <iostream>
 #include <math.h>
 
-Asteroid::Asteroid(float x, float y, float size)
+Asteroid::Asteroid(float x, float y, Asteroid::SizeList size)
 {
 	this->shape.setPosition({ x,y });
-	this->size = size;
 
 	this->initVariables();
+	this->initSize(size);
 	this->initShape();
 }
 
@@ -23,6 +23,11 @@ const sf::FloatRect Asteroid::getGlobalBounds() const
 const sf::Vector2f Asteroid::getPosition() const
 {
 	return this->shape.getPosition();
+}
+
+const Asteroid::SizeList Asteroid::getSizeType() const
+{
+	return this->sizeType;
 }
 
 void Asteroid::updatePosition()
@@ -64,6 +69,26 @@ void Asteroid::initVariables()
 	this->angularDirection = rand() % 360;
 	this->rotateSpeed = static_cast<float>(rand() % 21 - 10);
 	this->moveSpeed = 2.f;
+}
+
+void Asteroid::initSize(Asteroid::SizeList sizeType)
+{
+	switch (sizeType)
+	{
+	case Asteroid::SizeList::small:
+		this->sizeType = sizeType;
+		this->size = 5.f;
+		break;
+	case Asteroid::SizeList::medium:
+		this->sizeType = sizeType;
+		this->size = 10.f;
+		break;
+	case Asteroid::SizeList::large:
+	default:
+		this->sizeType = Asteroid::SizeList::large;
+		this->size = 20.f;
+		break;
+	}
 }
 
 void Asteroid::initShape()

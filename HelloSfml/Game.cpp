@@ -155,12 +155,25 @@ void Game::updateBullets(const sf::RenderTarget* target)
     }
 }
 
-void Game::splitAsteroids(sf::Vector2f coords, int nbSplit = 2)
+void Game::splitAsteroids(sf::Vector2f coords, Asteroid::SizeList size, int nbSplit = 2)
 {
-    for (int i = 0; i < nbSplit; i++)
+    switch (size)
     {
-        this->temp_asteroids.push_back(Asteroid(coords.x, coords.y, 30.f));
-
+    case Asteroid::SizeList::large:
+        for (int i = 0; i < nbSplit; i++)
+        {
+            this->temp_asteroids.push_back(Asteroid(coords.x, coords.y, Asteroid::SizeList::medium));
+        }
+        break;
+    case Asteroid::SizeList::medium:
+        for (int i = 0; i < nbSplit; i++)
+        {
+            this->temp_asteroids.push_back(Asteroid(coords.x, coords.y, Asteroid::SizeList::small));
+        }
+        break;
+    case Asteroid::SizeList::small:
+    default:
+        break;
     }
 }
 
@@ -179,9 +192,8 @@ void Game::updateCollisions()
             }
         }
         if (isAsteroidDestroyed) {
-            splitAsteroids(asteroidIt->getPosition());
+            splitAsteroids(asteroidIt->getPosition(), asteroidIt->getSizeType());
             asteroidIt = this->asteroids.erase(asteroidIt); //clarifications ?
-
         }
         else {
             if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds())) {

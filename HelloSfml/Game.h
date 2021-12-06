@@ -53,7 +53,7 @@ private:
 
 	void spawnAsteroids(int n = 8);
 	void shootBulletOnPlayerPosition();
-	void splitAsteroids(sf::Vector2f coord, int nbSplit);
+	void splitAsteroids(sf::Vector2f coord, Asteroid::SizeList size, int nbSplit);
 
 	void renderAsteroids(sf::RenderTarget* target);
 	void renderBullets(sf::RenderTarget* target);
