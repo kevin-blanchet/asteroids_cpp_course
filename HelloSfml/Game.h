@@ -46,6 +46,7 @@ private:
 
 	Player player;
 	std::vector<Asteroid> asteroids;
+	std::vector<Asteroid> temp_asteroids;
 	std::vector<Bullet> bullets;
 
 	void initVariables();
@@ -53,6 +54,7 @@ private:
 
 	void spawnAsteroids(int n = 8);
 	void shootBulletOnPlayerPosition();
+	void splitAsteroids(sf::Vector2f coord, Asteroid::SizeList size, int nbSplit);
 
 	void winHP(int hp = 1);
 	void looseHP(int hp = 1);

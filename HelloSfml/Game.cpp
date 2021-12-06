@@ -162,10 +162,33 @@ void Game::updateBullets(const sf::RenderTarget* target)
     }
 }
 
+void Game::splitAsteroids(sf::Vector2f coords, Asteroid::SizeList size, int nbSplit = 2)
+{
+    switch (size)
+    {
+    case Asteroid::SizeList::large:
+        for (int i = 0; i < nbSplit; i++)
+        {
+            this->temp_asteroids.push_back(Asteroid(coords.x, coords.y, Asteroid::SizeList::medium));
+        }
+        break;
+    case Asteroid::SizeList::medium:
+        for (int i = 0; i < nbSplit; i++)
+        {
+            this->temp_asteroids.push_back(Asteroid(coords.x, coords.y, Asteroid::SizeList::small));
+        }
+        break;
+    case Asteroid::SizeList::small:
+    default:
+        break;
+    }
+}
+
 void Game::updateCollisions()
 {
     for (auto asteroidIt = this->asteroids.begin(); asteroidIt != this->asteroids.end();) {
         bool isAsteroidDestroyed = false;
+        bool asteroidAlmostDead = false;
         for (auto bulletIt = this->bullets.begin(); bulletIt != this->bullets.end() && !isAsteroidDestroyed;) {
             if (asteroidIt->getGlobalBounds().intersects(bulletIt->getGlobalBounds())) {
                 bulletIt = this->bullets.erase(bulletIt); //clarifications ?
@@ -176,6 +199,7 @@ void Game::updateCollisions()
             }
         }
         if (isAsteroidDestroyed) {
+            splitAsteroids(asteroidIt->getPosition(), asteroidIt->getSizeType());
             asteroidIt = this->asteroids.erase(asteroidIt); //clarifications ?
         }
         else {
@@ -189,7 +213,10 @@ void Game::updateCollisions()
             }
         }
     }
+    this->asteroids.insert(this->asteroids.end(), this->temp_asteroids.begin(), this->temp_asteroids.end());
+    this->temp_asteroids = std::vector<Asteroid>();
 }
+
 
 void Game::winHP(int hp)
 {
@@ -204,3 +231,4 @@ void Game::looseHP(int hp) {
     if (this->hitPoint <= 0)
         std::cout << "youdie";
 }
+
