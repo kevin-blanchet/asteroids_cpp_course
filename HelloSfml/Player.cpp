@@ -29,12 +29,17 @@ void Player::updatePosition(const sf::RenderTarget* target)
 		}
 		if (this->isForward)
 		{
-			//calculer x et y selon le sin et cosin du getRotation 
 			float pi = 3.14159265;
-			float angularDirection = -this->shape.getRotation();
-			float radAngularDirection = angularDirection * pi / 180;
-			this->shape.move(-sin(radAngularDirection) * moveSpeed, -cos(radAngularDirection) * moveSpeed);
+			this->velocity.x += sin(this->getAngularDirection() * pi / 180) * moveSpeed;
+			this->velocity.y -= cos(this->getAngularDirection() * pi / 180) * moveSpeed;
+			if (this->getSpeed() > this->maxSpeed) {
+				this->velocity *= (this->maxSpeed / this->getSpeed());
+			}
 		}
+		else {
+			this->velocity *= this->slowRate;
+		}
+		this->shape.move(this->velocity);
 	}
 }
 void Player::updateWindowBounds(const sf::RenderTarget* target)
@@ -64,9 +69,13 @@ void Player::render(sf::RenderTarget* target)
 
 void Player::initVariables()
 {
-	this->rotateSpeed = 5.f;
-	this->moveSpeed = 5.f;
-	this->size = 10.f;
+	this->rotateSpeed = 15.f;
+	this->moveSpeed = 1.f;
+	this->maxSpeed = 20.f;
+	this->slowRate = 0.95f;
+	this->size = 20.f;
+
+	this->velocity = { 0,0 };
 
 	this->b_canShoot = true;
 	this->b_canTeleport = true;
@@ -110,6 +119,11 @@ void Player::setPosition(float x, float y)
 const float Player::getAngularDirection() const
 {
 	return this->shape.getRotation();
+}
+
+const float Player::getSpeed() const
+{
+	return sqrt(this->velocity.x * this->velocity.x + this->velocity.y * this->velocity.y);
 }
 
 const sf::FloatRect Player::getGlobalBounds() const

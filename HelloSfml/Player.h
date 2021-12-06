@@ -19,6 +19,7 @@ public:
 	const sf::Vector2f getPosition() const;
 	void setPosition(float x, float y);
 	const float getAngularDirection() const;
+	const float getSpeed() const;
 	const sf::FloatRect getGlobalBounds() const;
 
 	bool canShoot();
@@ -37,7 +38,11 @@ private:
 	sf::CircleShape shape;
 	float rotateSpeed;
 	float moveSpeed;
+	float maxSpeed;
+	float slowRate;
 	float size;
+	
+	sf::Vector2f velocity;
 
 	bool b_canShoot;	//prefixed because of a conflict with function canShoot
 	bool b_canTeleport;	//prefixed because of a conflict with function canTeleport
