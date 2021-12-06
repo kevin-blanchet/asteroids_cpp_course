@@ -32,7 +32,7 @@ const Asteroid::SizeList Asteroid::getSizeType() const
 
 void Asteroid::updatePosition()
 {
-	float pi = 3.14159265;
+	float pi = 3.14159265f;
 	float radAngularDirection = this->angularDirection * pi / 180;
 	this->shape.rotate(this->rotateSpeed);
 	this->shape.move(sin(radAngularDirection) * moveSpeed, cos(radAngularDirection) * moveSpeed);

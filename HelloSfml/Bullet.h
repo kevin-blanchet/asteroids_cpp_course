@@ -8,7 +8,7 @@
 class Bullet
 {
 public:
-	Bullet(float x = 0.f, float y = 0.f, int angularDirection = 50.f);
+	Bullet(float x = 0.f, float y = 0.f, float angularDirection = 50.f);
 	virtual ~Bullet();
 
 	void update(const sf::RenderTarget* target);
@@ -18,7 +18,7 @@ public:
 	const sf::FloatRect getGlobalBounds() const;
 private:
 	sf::CircleShape shape;
-	int angularDirection;
+	float angularDirection;
 	float moveSpeed;
 	float size;
 	float lifeSpanMax;
