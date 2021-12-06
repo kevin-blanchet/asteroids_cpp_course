@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Asteroid.h"
 #include "Bullet.h"
+#include "UiManager.h"
 
 /*
 * Game engine
@@ -48,6 +49,7 @@ private:
 	std::vector<Asteroid> asteroids;
 	std::vector<Asteroid> temp_asteroids;
 	std::vector<Bullet> bullets;
+	UiManager* userInterface;
 
 	void initVariables();
 	void initWindow();

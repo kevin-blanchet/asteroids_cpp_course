@@ -100,6 +100,7 @@ void Game::initVariables()
 	this->window = nullptr;
     this->endGame = false;
     this->hitPoint = 4;
+    this->userInterface = nullptr;
 }
 
 void Game::initWindow()
