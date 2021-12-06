@@ -91,6 +91,7 @@ void Game::render()
     this->player.render(this->window);
     this->renderAsteroids(this->window);
     this->renderBullets(this->window);
+    this->userInterface->render(this->window);
 
     this->window->display();
 }
@@ -100,7 +101,7 @@ void Game::initVariables()
 	this->window = nullptr;
     this->endGame = false;
     this->hitPoint = 4;
-    this->userInterface = nullptr;
+    this->userInterface = new UiManager();
 }
 
 void Game::initWindow()

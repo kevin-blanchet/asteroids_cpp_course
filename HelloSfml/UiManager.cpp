@@ -1,22 +1,23 @@
-#include "GuiManager.h"
+#include "UiManager.h"
 
-GuiManager::GuiManager()
+UiManager::UiManager()
 {
 }
 
-GuiManager::~GuiManager()
+UiManager::~UiManager()
 {
 }
 
-void GuiManager::render()
+void UiManager::render(sf::RenderTarget* target)
+{
+	target->draw(this->gameOverText);
+}
+
+void UiManager::update(const sf::RenderTarget* target)
 {
 }
 
-void GuiManager::update()
-{
-}
-
-void GuiManager::initVariables()
+void UiManager::initVariables()
 {
 	if (!this->font.loadFromFile("./Resources/Vectorb.ttf"))
 	{

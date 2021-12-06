@@ -7,13 +7,14 @@
 
 #include <iostream>
 
-class GuiManager
+class UiManager
 {
 	public:
-		GuiManager();
-		~GuiManager();
-		void render();
-		void update();
+		UiManager();
+		~UiManager();
+		void update(const sf::RenderTarget* target);
+		void render(sf::RenderTarget* target);
+
 	private:	
 		sf::Font font;
 		sf::Text gameOverText;
