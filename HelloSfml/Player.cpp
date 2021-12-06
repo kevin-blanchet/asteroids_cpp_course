@@ -29,7 +29,7 @@ void Player::updatePosition(const sf::RenderTarget* target)
 		}
 		if (this->isForward)
 		{
-			float pi = 3.14159265;
+			float pi = 3.14159265f;
 			this->velocity.x += sin(this->getAngularDirection() * pi / 180) * moveSpeed;
 			this->velocity.y -= cos(this->getAngularDirection() * pi / 180) * moveSpeed;
 			if (this->getSpeed() > this->maxSpeed) {

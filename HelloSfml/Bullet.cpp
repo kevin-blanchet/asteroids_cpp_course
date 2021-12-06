@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-Bullet::Bullet(float x, float y, int angularDirection)
+Bullet::Bullet(float x, float y, float angularDirection)
 {
 	this->shape.setPosition({ x,y });
 	this->angularDirection = angularDirection;
@@ -45,7 +45,7 @@ void Bullet::initShape()
 
 void Bullet::updatePosition()
 {
-	float pi = 3.14159265;
+	float pi = 3.14159265f;
 	float radAngularDirection = - this->angularDirection * pi / 180;
 	this->shape.move(- sin(radAngularDirection) * moveSpeed, - cos(radAngularDirection) * moveSpeed);
 }
