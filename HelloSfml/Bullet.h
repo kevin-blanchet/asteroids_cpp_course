@@ -11,6 +11,8 @@ public:
 	Bullet(float x = 0.f, float y = 0.f, float angularDirection = 50.f);
 	virtual ~Bullet();
 
+	bool isDead();
+
 	void update(const sf::RenderTarget* target);
 
 	void render(sf::RenderTarget* target);
@@ -23,6 +25,8 @@ private:
 	float size;
 	float lifeSpanMax;
 	float lifeSpan;
+
+	bool b_isDead;
 
 	void initVariables();
 	void initShape();

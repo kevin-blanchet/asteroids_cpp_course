@@ -157,8 +157,14 @@ void Game::updateAsteroids(const sf::RenderTarget* target)
 
 void Game::updateBullets(const sf::RenderTarget* target)
 {
-    for (auto& it : this->bullets) {
-        it.update(target);
+    for (auto bulletIt = this->bullets.begin(); bulletIt != this->bullets.end();) {
+        if (!bulletIt->isDead()) {
+            bulletIt->update(target);
+            bulletIt++;
+        }
+        else {
+            bulletIt = this->bullets.erase(bulletIt);
+        }
     }
 }
 
