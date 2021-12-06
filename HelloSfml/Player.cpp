@@ -102,6 +102,11 @@ const sf::Vector2f Player::getPosition() const
 	return this->shape.getPosition();
 }
 
+void Player::setPosition(float x, float y)
+{
+	this->shape.setPosition({ x,y });
+}
+
 const float Player::getAngularDirection() const
 {
 	return this->shape.getRotation();

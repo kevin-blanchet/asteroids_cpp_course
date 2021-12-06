@@ -17,6 +17,7 @@ public:
 
 
 	const sf::Vector2f getPosition() const;
+	void setPosition(float x, float y);
 	const float getAngularDirection() const;
 	const sf::FloatRect getGlobalBounds() const;
 

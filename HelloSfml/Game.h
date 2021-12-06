@@ -31,6 +31,7 @@ private:
 	sf::RenderWindow* window; //On créé un pointeur pour avoir plus de controle
 	sf::Event ev;
 	bool endGame;
+	int hitPoint;
 
 	enum controlMap
 	{
@@ -54,6 +55,9 @@ private:
 	void spawnAsteroids(int n = 8);
 	void shootBulletOnPlayerPosition();
 	void splitAsteroids(sf::Vector2f coord, Asteroid::SizeList size, int nbSplit);
+
+	void winHP(int hp = 1);
+	void looseHP(int hp = 1);
 
 	void renderAsteroids(sf::RenderTarget* target);
 	void renderBullets(sf::RenderTarget* target);
