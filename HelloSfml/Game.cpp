@@ -12,6 +12,7 @@ Game::Game()
 
 Game::~Game() {
 	delete this->window;
+    delete this->userInterface;
 }
 
 const bool Game::isRunning() const
@@ -83,6 +84,7 @@ void Game::update()
     this->player.update(this->window);
     this->updateAsteroids(this->window);
     this->updateBullets(this->window);
+    this->userInterface->update(this->window);
 }
 void Game::render() 
 {
@@ -91,8 +93,9 @@ void Game::render()
     this->player.render(this->window);
     this->renderAsteroids(this->window);
     this->renderBullets(this->window);
-    this->userInterface->render(this->window);
-
+    if (this->hitPoint <= 0) {
+        this->userInterface->render(this->window);
+    }
     this->window->display();
 }
 
@@ -101,7 +104,9 @@ void Game::initVariables()
 	this->window = nullptr;
     this->endGame = false;
     this->hitPoint = 4;
+
     this->userInterface = new UiManager();
+
 }
 
 void Game::initWindow()
