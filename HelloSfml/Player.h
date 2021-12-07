@@ -15,6 +15,8 @@ public:
 
 	void render(sf::RenderTarget* target);
 
+	bool shouldUpdate();
+	bool shouldRender();
 
 	const sf::Vector2f getPosition() const;
 	const float getAngularDirection() const;
@@ -35,6 +37,8 @@ public:
 	void turnLeft(bool isPressed = true);
 	void turnRight(bool isPressed = true);
 
+	void respawn();
+
 private:
 	sf::CircleShape shape;
 	float rotateSpeed;
@@ -42,6 +46,9 @@ private:
 	float maxSpeed;
 	float slowRate;
 	float size;
+
+	int respawnTimer;
+	int maxRespawnTimer;
 	
 	sf::Vector2f velocity;
 
@@ -58,5 +65,8 @@ private:
 
 	void updatePosition(const sf::RenderTarget* target);
 	void updateWindowBounds(const sf::RenderTarget* target);
+	void updateRespawnTimer();
+
+	bool isRespawning();
 };
 
