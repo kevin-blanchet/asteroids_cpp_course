@@ -56,15 +56,38 @@ void Player::updateWindowBounds(const sf::RenderTarget* target)
 	if (this->shape.getPosition().y > target->getSize().y)
 		this->shape.move({ 0.f, -1.f * target->getSize().y });
 }
+void Player::updateRespawnTimer()
+{
+	this->respawnTimer--;
+}
+bool Player::isRespawning()
+{
+	return (this->respawnTimer > 0);
+}
 void Player::update(const sf::RenderTarget* target)
 {
-	this->updatePosition(target);
-	this->updateWindowBounds(target);
+	if (this->isRespawning()) { this->updateRespawnTimer(); }
+	if (this->shouldUpdate()) {
+		this->updatePosition(target);
+		this->updateWindowBounds(target);
+	}
 }
 
 void Player::render(sf::RenderTarget* target)
 {
-	target->draw(this->shape);
+	if (this->shouldRender()) {
+		target->draw(this->shape);
+	}
+}
+
+bool Player::shouldUpdate()
+{
+	return (!this->isRespawning());
+}
+
+bool Player::shouldRender()
+{
+	return (!this->isRespawning());
 }
 
 void Player::initVariables()
@@ -74,6 +97,9 @@ void Player::initVariables()
 	this->maxSpeed = 20.f;
 	this->slowRate = 0.95f;
 	this->size = 20.f;
+
+	this->respawnTimer = 0;
+	this->maxRespawnTimer = 24;
 
 	this->velocity = { 0,0 };
 
@@ -98,8 +124,13 @@ void Player::initShape()
 
 void Player::teleport(bool isPressed)
 {
-	this->isTeleport = (isPressed && this->b_canTeleport);
-	this->b_canTeleport = !isPressed;
+	if (isPressed) {
+		this->isTeleport = this->b_canTeleport;
+	}
+	else
+	{
+		this->b_canTeleport = true;
+	}
 }
 
 void Player::teleport(const sf::RenderTarget* target) {
@@ -138,12 +169,12 @@ void Player::canShoot(bool canShoot)
 
 bool Player::canShoot()
 {
-	return this->b_canShoot;
+	return (this->b_canShoot && this->shouldUpdate());
 }
 
 bool Player::canTeleport()
 {
-	return this->b_canTeleport;
+	return (this->b_canTeleport && this->shouldUpdate());
 }
 
 void Player::forward(bool isPressed)
@@ -159,4 +190,9 @@ void Player::turnLeft(bool isPressed)
 void Player::turnRight(bool isPressed)
 {
 	this->isTurnRight = isPressed;
+}
+
+void Player::respawn()
+{
+	this->respawnTimer = this->maxRespawnTimer;
 }

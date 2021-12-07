@@ -44,10 +44,15 @@ void Game::pollEvents()
                 this->player.turnRight();
                 break;
             case controlMap::teleport:
-                this->player.teleport();
+                if (this->player.canTeleport()) {
+                    this->player.teleport();
+                    this->player.respawn();
+                }
                 break;
             case controlMap::shoot:
-                this->shootBulletOnPlayerPosition();
+                if (this->player.canShoot()) {
+                    this->shootBulletOnPlayerPosition();
+                }
                 break;
             }
             break;
@@ -203,9 +208,10 @@ void Game::updateCollisions()
             asteroidIt = this->asteroids.erase(asteroidIt); //clarifications ?
         }
         else {
-            if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds())) {
+            if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds()) && this->player.shouldUpdate()) {
                 this->looseHP();
                 this->player.setPosition((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
+                this->player.respawn();
                 asteroidIt = this->asteroids.erase(asteroidIt);
             }
             else {
