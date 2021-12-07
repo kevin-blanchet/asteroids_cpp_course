@@ -17,19 +17,20 @@ public:
 
 
 	const sf::Vector2f getPosition() const;
-	void setPosition(float x, float y);
 	const float getAngularDirection() const;
 	const float getSpeed() const;
 	const sf::FloatRect getGlobalBounds() const;
 
 	bool canShoot();
-	void canShoot(bool isPressed);
 
 	bool canTeleport();
 
+	void setPosition(float x, float y);
+	void reset(float x, float y);
+
 	void teleport(bool isPressed = true);
 	void teleport(const sf::RenderTarget* target);
-
+	void canShoot(bool isPressed);
 	void forward(bool isPressed = true);
 	void turnLeft(bool isPressed = true);
 	void turnRight(bool isPressed = true);
