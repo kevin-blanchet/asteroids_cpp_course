@@ -13,10 +13,16 @@ Bullet::~Bullet()
 {
 }
 
+bool Bullet::isDead()
+{
+	return this->b_isDead;
+}
+
 void Bullet::update(const sf::RenderTarget* target)
 {
 	this->updatePosition();
 	this->updateWindowBounds(target);
+	this->updateLifeSpan();
 }
 
 void Bullet::render(sf::RenderTarget* target)
@@ -32,7 +38,11 @@ const sf::FloatRect Bullet::getGlobalBounds() const
 void Bullet::initVariables()
 {
 	this->size = 1.f;
-	this->moveSpeed = 2.f;
+	this->moveSpeed = 20.f;
+	this->lifeSpan = 0;
+	this->lifeSpanMax = 20;
+
+	this->b_isDead = false;
 }
 
 void Bullet::initShape()
@@ -48,6 +58,12 @@ void Bullet::updatePosition()
 	float pi = 3.14159265f;
 	float radAngularDirection = - this->angularDirection * pi / 180;
 	this->shape.move(- sin(radAngularDirection) * moveSpeed, - cos(radAngularDirection) * moveSpeed);
+}
+
+void Bullet::updateLifeSpan()
+{
+	this->lifeSpan++;
+	this->b_isDead = (this->lifeSpan > this->lifeSpanMax);
 }
 
 void Bullet::updateWindowBounds(const sf::RenderTarget* target)

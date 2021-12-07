@@ -162,8 +162,14 @@ void Game::updateAsteroids(const sf::RenderTarget* target)
 
 void Game::updateBullets(const sf::RenderTarget* target)
 {
-    for (auto& it : this->bullets) {
-        it.update(target);
+    for (auto bulletIt = this->bullets.begin(); bulletIt != this->bullets.end();) {
+        if (!bulletIt->isDead()) {
+            bulletIt->update(target);
+            bulletIt++;
+        }
+        else {
+            bulletIt = this->bullets.erase(bulletIt);
+        }
     }
 }
 
@@ -210,7 +216,8 @@ void Game::updateCollisions()
         else {
             if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds()) && this->player.shouldUpdate()) {
                 this->looseHP();
-                this->player.setPosition((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
+                this->player.reset(window->getSize().x / 2.f, window->getSize().y / 2.f);
+                splitAsteroids(asteroidIt->getPosition(), asteroidIt->getSizeType());
                 this->player.respawn();
                 asteroidIt = this->asteroids.erase(asteroidIt);
             }

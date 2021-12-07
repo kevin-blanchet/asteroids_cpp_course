@@ -147,6 +147,12 @@ void Player::setPosition(float x, float y)
 	this->shape.setPosition({ x,y });
 }
 
+void Player::reset(float x, float y)
+{
+	this->setPosition(x, y);
+	this->velocity = { 0.f, 0.f };
+}
+
 const float Player::getAngularDirection() const
 {
 	return this->shape.getRotation();
