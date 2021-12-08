@@ -50,6 +50,7 @@ private:
 	std::vector<Asteroid> temp_asteroids;
 	std::vector<Bullet> bullets;
 	UiManager* userInterface;
+	UiManager* userInterfaceLife;
 
 	void initVariables();
 	void initWindow();

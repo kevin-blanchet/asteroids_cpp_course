@@ -85,6 +85,7 @@ void Game::update()
     this->updateAsteroids(this->window);
     this->updateBullets(this->window);
     this->userInterface->update(this->window);
+    this->userInterfaceLife->update(this->window, this->hitPoint);
 }
 void Game::render() 
 {
@@ -95,6 +96,8 @@ void Game::render()
     this->renderBullets(this->window);
     if (this->hitPoint <= 0) {
         this->userInterface->render(this->window);
+    }else {
+        this->userInterfaceLife->render(this->window);
     }
     this->window->display();
 }
@@ -106,6 +109,7 @@ void Game::initVariables()
     this->hitPoint = 4;
 
     this->userInterface = new UiManager();
+    this->userInterfaceLife = new UiManager(1);
 
 }
 
