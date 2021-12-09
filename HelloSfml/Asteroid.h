@@ -15,7 +15,7 @@ public:
 		, small = 1
 	};
 
-	Asteroid(float x = 0.f, float y = 0.f, Asteroid::SizeList size = Asteroid::SizeList::large);
+	explicit Asteroid(float x = 0.f, float y = 0.f, Asteroid::SizeList size = Asteroid::SizeList::large);
 	virtual ~Asteroid();
 	
 	const sf::FloatRect getGlobalBounds() const;
