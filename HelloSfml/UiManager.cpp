@@ -45,21 +45,23 @@ void UiManager::initVariables()
 void UiManager::initUiElementMap(const sf::RenderTarget* target)
 {
 	UiString* startUiString = new UiString(&this->startText);
-	startUiString->setCharacterSize(20);
+	startUiString->setCharacterSize(48);
 	startUiString->setFillColor(sf::Color::White);
 	startUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
 	uiElementMap.insert({ UiManager::UiElementList::Start, startUiString });
 
 	UiString* copyrightUiString = new UiString(&this->copyrightText);
-	copyrightUiString->setCharacterSize(20);
+	copyrightUiString->setCharacterSize(15);
 	copyrightUiString->setFillColor(sf::Color::White);
-	copyrightUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
+	copyrightUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y - 15.f });
+	copyrightUiString->display(true);
 	uiElementMap.insert({ UiManager::UiElementList::Copyright, copyrightUiString });
 
 	UiString* scoreUiString = new UiString(&this->scoreText);
 	scoreUiString->setCharacterSize(20);
 	scoreUiString->setFillColor(sf::Color::White);
-	scoreUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
+	scoreUiString->setPosition({ 20, 20 });
+	scoreUiString->display(true);
 	uiElementMap.insert({ UiManager::UiElementList::Score, scoreUiString });
 
 	UiString* gameOverUiString = new UiString(&this->gameOverText);
