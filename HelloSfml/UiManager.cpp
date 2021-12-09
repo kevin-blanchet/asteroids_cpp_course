@@ -17,14 +17,6 @@ void UiManager::update(const sf::RenderTarget* target)
 	{
 		it.second->update(target);
 	}
-
-	//this->gameOverText.setPosition(target->getSize().x / 2.f, target->getSize().y / 2.f);
-	//this->life.setPosition(target->getSize().x / 8.f, target->getSize().y / 8.f);
-	//std::string lifeString;
-	//for (int i = lifes; i > 0; --i) {
-	//	lifeString += "G ";
-	//}
-	//this->life.setString(lifeString);
 }
 
 void UiManager::render(sf::RenderTarget* target)
@@ -37,9 +29,9 @@ void UiManager::render(sf::RenderTarget* target)
 	}
 }
 
-void UiManager::display(UiManager::UiElementList uiElement)
+void UiManager::display(UiManager::UiElementList uiElement, bool shouldDisplay)
 {
-	this->uiElementMap[uiElement]->display(true);
+	this->uiElementMap[uiElement]->display(shouldDisplay);
 }
 
 void UiManager::initVariables()
@@ -48,11 +40,6 @@ void UiManager::initVariables()
 	this->copyrightText = "© YNOV 2021";
 	this->scoreText = "00";
 	this->gameOverText = "GAME OVER";
-
-	//this->gameOverText.setCharacterSize(48);
-	//this->gameOverText.setFillColor(sf::Color::White);
-	//sf::FloatRect textLocalBounds = this->gameOverText.getLocalBounds();
-	//this->gameOverText.setOrigin( (textLocalBounds.width / 2.f), (textLocalBounds.height / 2.f));
 }
 
 void UiManager::initUiElementMap(const sf::RenderTarget* target)
@@ -67,13 +54,13 @@ void UiManager::initUiElementMap(const sf::RenderTarget* target)
 	copyrightUiString->setCharacterSize(20);
 	copyrightUiString->setFillColor(sf::Color::White);
 	copyrightUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
-	uiElementMap.insert({ UiManager::UiElementList::GameOver, copyrightUiString });
+	uiElementMap.insert({ UiManager::UiElementList::Copyright, copyrightUiString });
 
 	UiString* scoreUiString = new UiString(&this->scoreText);
 	scoreUiString->setCharacterSize(20);
 	scoreUiString->setFillColor(sf::Color::White);
 	scoreUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
-	uiElementMap.insert({ UiManager::UiElementList::GameOver, scoreUiString });
+	uiElementMap.insert({ UiManager::UiElementList::Score, scoreUiString });
 
 	UiString* gameOverUiString = new UiString(&this->gameOverText);
 	gameOverUiString->setCharacterSize(20);

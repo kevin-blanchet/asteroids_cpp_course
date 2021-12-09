@@ -213,6 +213,9 @@ void Game::updateCollisions()
         else {
             if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds())) {
                 this->looseHP();
+                if (this->hitPoint <= 0) {
+                    this->userInterface->display(UiManager::UiElementList::GameOver, true);
+                }
                 this->player.setPosition((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
                 asteroidIt = this->asteroids.erase(asteroidIt);
             }

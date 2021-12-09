@@ -28,7 +28,7 @@ class UiManager
 		void update(const sf::RenderTarget* target);
 		void render(sf::RenderTarget* target);
 
-		void display(UiManager::UiElementList uiElement);
+		void display(UiManager::UiElementList uiElement, bool shouldDisplay = true);
 
 	private:
 		std::string startText;
