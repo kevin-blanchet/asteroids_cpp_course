@@ -87,7 +87,7 @@ void Player::initVariables()
 
 void Player::initShape()
 {
-	this->shape.setPointCount(3);
+	//this->shape.setPointCount(3);
 	this->shape.setRadius(this->size);
 	this->shape.setOrigin({ this->size, this->size });
 	this->shape.setScale({ .66f, 1.f });

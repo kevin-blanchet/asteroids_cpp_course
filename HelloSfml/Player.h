@@ -5,10 +5,12 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 
+#include "SpaceshipShape.h"
+
 class Player
 {
 public:
-	Player(float x = 0.f, float y = 0.f);
+	explicit Player(float x = 0.f, float y = 0.f);
 	virtual ~Player();
 
 	void update(const sf::RenderTarget* target);
@@ -35,7 +37,7 @@ public:
 	void turnRight(bool isPressed = true);
 
 private:
-	sf::CircleShape shape;
+	SpaceshipShape shape;
 	float rotateSpeed;
 	float moveSpeed;
 	float maxSpeed;
