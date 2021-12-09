@@ -7,22 +7,40 @@
 
 #include <iostream>
 
+#include "UiString.h"
+#include "UiGraphic.h"
+
 class UiManager
 {
 	public:
+		enum struct UiElementList
+		{
+			Start = 0
+			, Copyright = 1
+			, Score = 2
+			, HitPoints = 3
+			, GameOver = 4
+		};
+
 		UiManager();
-		UiManager(int);
 		~UiManager();
-		void update(const sf::RenderTarget* target, int lifes = 0);
+
+		void update(const sf::RenderTarget* target);
 		void render(sf::RenderTarget* target);
 
-	private:	
-		sf::Font font;
-		sf::Text gameOverText;
-		sf::Font gui;
-		sf::Text life;
+		void display(UiManager::UiElementList uiElement);
+
+	private:
+		std::string startText;
+		std::string copyrightText;
+		std::string scoreText;
+		std::string hitPointsText;
+		std::string gameOverText;
+
+		std::map<UiManager::UiElementList, UiElement*> uiElementMap;
 
 		void initVariables();
-		void initVariablesUI();
-};
+		void initUiElementMap();
 
+		void deleteAllItemsFromUiElementMap();
+};
