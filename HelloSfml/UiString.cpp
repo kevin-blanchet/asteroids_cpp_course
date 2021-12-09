@@ -7,6 +7,11 @@ UiString::UiString(std::string* textString)
 	this->initText();
 }
 
+UiString::~UiString()
+{
+	delete this->textString;
+}
+
 void UiString::render(sf::RenderTarget* target)
 {
 	target->draw(this->text);

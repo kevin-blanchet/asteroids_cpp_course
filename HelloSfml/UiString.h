@@ -7,6 +7,7 @@ class UiString :
 {
 public:
 	UiString(std::string* textString);
+	~UiString();
 
 	void render(sf::RenderTarget* target);
 
