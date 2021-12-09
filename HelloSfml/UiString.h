@@ -9,6 +9,10 @@ public:
 	UiString(std::string* textString);
 
 	void render(sf::RenderTarget* target);
+
+	void setCharacterSize(unsigned int size);
+	void setFillColor(const sf::Color color);
+	void setPosition(const sf::Vector2f position);
 private:
 	sf::Font font;
 	sf::Text text;

@@ -22,7 +22,7 @@ class UiManager
 			, GameOver = 4
 		};
 
-		UiManager();
+		UiManager(const sf::RenderTarget* target);
 		~UiManager();
 
 		void update(const sf::RenderTarget* target);
@@ -40,7 +40,7 @@ class UiManager
 		std::map<UiManager::UiElementList, UiElement*> uiElementMap;
 
 		void initVariables();
-		void initUiElementMap();
+		void initUiElementMap(const sf::RenderTarget* target);
 
 		void deleteAllItemsFromUiElementMap();
 };

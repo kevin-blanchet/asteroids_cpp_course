@@ -1,9 +1,9 @@
 #include "UiManager.h"
 
-UiManager::UiManager()
+UiManager::UiManager(const sf::RenderTarget* target)
 {
 	this->initVariables();
-	this->initUiElementMap();
+	this->initUiElementMap(target);
 }
 
 UiManager::~UiManager()
@@ -15,7 +15,7 @@ void UiManager::update(const sf::RenderTarget* target)
 {
 	for (auto& it : this->uiElementMap)
 	{
-		it.second->update();
+		it.second->update(target);
 	}
 
 	//this->gameOverText.setPosition(target->getSize().x / 2.f, target->getSize().y / 2.f);
@@ -31,7 +31,9 @@ void UiManager::render(sf::RenderTarget* target)
 {
 	for (auto& it : this->uiElementMap)
 	{
-		it.second->render(target);
+		if (it.second->isDisplayed()) {
+			it.second->render(target);
+		}
 	}
 }
 
@@ -47,30 +49,39 @@ void UiManager::initVariables()
 	this->scoreText = "00";
 	this->gameOverText = "GAME OVER";
 
-	//this->gameOverText.setFont(this->font);
-	//if (!this->font.loadFromFile("../Resources/Vectorb.ttf"))
-	//{
-	//	std::cout << "Error while loading font" << "\n";
-	//}
-	//else { std::cout << "Loaded"; }
-	//this->gameOverText.setString(" Game Over !! ");
 	//this->gameOverText.setCharacterSize(48);
 	//this->gameOverText.setFillColor(sf::Color::White);
 	//sf::FloatRect textLocalBounds = this->gameOverText.getLocalBounds();
 	//this->gameOverText.setOrigin( (textLocalBounds.width / 2.f), (textLocalBounds.height / 2.f));
 }
 
-void UiManager::initUiElementMap()
+void UiManager::initUiElementMap(const sf::RenderTarget* target)
 {
-	UiElement* startUiString = new UiString(&this->startText);
+	UiString* startUiString = new UiString(&this->startText);
+	startUiString->setCharacterSize(20);
+	startUiString->setFillColor(sf::Color::White);
+	startUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
 	uiElementMap.insert({ UiManager::UiElementList::Start, startUiString });
-	UiElement* copyrightUiString = new UiString(&this->copyrightText);
+
+	UiString* copyrightUiString = new UiString(&this->copyrightText);
+	copyrightUiString->setCharacterSize(20);
+	copyrightUiString->setFillColor(sf::Color::White);
+	copyrightUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
 	uiElementMap.insert({ UiManager::UiElementList::GameOver, copyrightUiString });
-	UiElement* scoreUiString = new UiString(&this->scoreText);
+
+	UiString* scoreUiString = new UiString(&this->scoreText);
+	scoreUiString->setCharacterSize(20);
+	scoreUiString->setFillColor(sf::Color::White);
+	scoreUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
 	uiElementMap.insert({ UiManager::UiElementList::GameOver, scoreUiString });
-	UiElement* gameOverUiString = new UiString(&this->gameOverText);
+
+	UiString* gameOverUiString = new UiString(&this->gameOverText);
+	gameOverUiString->setCharacterSize(20);
+	gameOverUiString->setFillColor(sf::Color::White);
+	gameOverUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
 	uiElementMap.insert({ UiManager::UiElementList::GameOver, gameOverUiString });
-	UiElement* hitPointUiGraphic = new UiGraphic();
+
+	UiGraphic* hitPointUiGraphic = new UiGraphic();
 	uiElementMap.insert({ UiManager::UiElementList::HitPoints, hitPointUiGraphic });
 }
 

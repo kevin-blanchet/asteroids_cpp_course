@@ -8,6 +8,7 @@ Game::Game()
 	initWindow();
     this->player = Player((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
     this->spawnAsteroids();
+    this->userInterface = new UiManager(this->window);
 }
 
 Game::~Game() {
@@ -84,7 +85,6 @@ void Game::update()
     this->player.update(this->window);
     this->updateAsteroids(this->window);
     this->updateBullets(this->window);
-    this->userInterface->update(this->window);
 }
 void Game::render() 
 {
@@ -93,9 +93,7 @@ void Game::render()
     this->player.render(this->window);
     this->renderAsteroids(this->window);
     this->renderBullets(this->window);
-    if (this->hitPoint <= 0) {
-        this->userInterface->render(this->window);
-    }
+    this->userInterface->render(this->window);
     this->window->display();
 }
 
@@ -104,9 +102,6 @@ void Game::initVariables()
 	this->window = nullptr;
     this->endGame = false;
     this->hitPoint = 4;
-
-    this->userInterface = new UiManager();
-
 }
 
 void Game::initWindow()
