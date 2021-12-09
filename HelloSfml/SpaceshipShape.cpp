@@ -1,29 +1,45 @@
 #include "SpaceshipShape.h"
 
-SpaceshipShape::SpaceshipShape(float radius)
+SpaceshipShape::SpaceshipShape(float size)
 {
-    this->radius = radius;
+    this->size = size;
     update();
 }
 
 size_t SpaceshipShape::getPointCount() const
 {
-    return 3;
+    return 6;
 }
 
 sf::Vector2f SpaceshipShape::getPoint(std::size_t index) const
 {
-    static const float pi = 3.141592654f;
-
-    float angle = index * 2 * pi / getPointCount() - pi / 2;
-    float x = std::cos(angle) * radius;
-    float y = std::sin(angle) * radius;
-
-    return sf::Vector2f(radius + x, radius + y);
+    sf::Vector2f returnVector;
+    switch (index)
+    {
+    case 0:
+        returnVector = { 0.f, 1.85f };
+        break;
+    case 1:
+        returnVector = { 1.f, -1.f };
+        break;
+    case 2:
+        returnVector = { .5f, -.5f };
+        break;
+    case 3:
+        returnVector = { 0.f, -.3f };
+        break;
+    case 4:
+        returnVector = { -.5f, -.5f };
+        break;
+    case 5:
+        returnVector = { -1.f, -1.f };
+        break;
+    }
+    return returnVector * this->size;
 }
 
-void SpaceshipShape::setRadius(float radius)
+void SpaceshipShape::setSize(float size)
 {
-    this->radius = radius;
+    this->size = size;
     update();
 }

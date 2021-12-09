@@ -14,9 +14,9 @@ public:
     virtual size_t getPointCount() const;
     virtual sf::Vector2f getPoint(std::size_t index) const;
 
-    void setRadius(float size);
+    void setSize(float size);
 
 private:
-    float radius;
+    float size;
 };
 

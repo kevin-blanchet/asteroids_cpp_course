@@ -73,7 +73,7 @@ void Player::initVariables()
 	this->moveSpeed = 1.f;
 	this->maxSpeed = 20.f;
 	this->slowRate = 0.95f;
-	this->size = 20.f;
+	this->size = 5.f;
 
 	this->velocity = { 0,0 };
 
@@ -88,9 +88,8 @@ void Player::initVariables()
 void Player::initShape()
 {
 	//this->shape.setPointCount(3);
-	this->shape.setRadius(this->size);
-	this->shape.setOrigin({ this->size, this->size });
-	this->shape.setScale({ .66f, 1.f });
+	this->shape.setSize(this->size);
+	this->shape.setScale({ 1.f, -1.f });
 	this->shape.setFillColor(sf::Color::Transparent);
 	this->shape.setOutlineColor(sf::Color::White);
 	this->shape.setOutlineThickness(1.f);
