@@ -17,24 +17,29 @@ public:
 
 	void render(sf::RenderTarget* target);
 
+	bool shouldUpdate();
+	bool shouldRender();
 
 	const sf::Vector2f getPosition() const;
-	void setPosition(float x, float y);
 	const float getAngularDirection() const;
 	const float getSpeed() const;
 	const sf::FloatRect getGlobalBounds() const;
 
 	bool canShoot();
-	void canShoot(bool isPressed);
 
 	bool canTeleport();
 
+	void setPosition(float x, float y);
+	void reset(float x, float y);
+
 	void teleport(bool isPressed = true);
 	void teleport(const sf::RenderTarget* target);
-
+	void canShoot(bool isPressed);
 	void forward(bool isPressed = true);
 	void turnLeft(bool isPressed = true);
 	void turnRight(bool isPressed = true);
+
+	void respawn();
 
 private:
 	SpaceshipShape shape;
@@ -43,6 +48,9 @@ private:
 	float maxSpeed;
 	float slowRate;
 	float size;
+
+	int respawnTimer;
+	int maxRespawnTimer;
 	
 	sf::Vector2f velocity;
 
@@ -59,5 +67,8 @@ private:
 
 	void updatePosition(const sf::RenderTarget* target);
 	void updateWindowBounds(const sf::RenderTarget* target);
+	void updateRespawnTimer();
+
+	bool isRespawning();
 };
 
