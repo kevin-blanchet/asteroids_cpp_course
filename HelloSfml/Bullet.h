@@ -8,7 +8,7 @@
 class Bullet
 {
 public:
-	Bullet(float x = 0.f, float y = 0.f, float angularDirection = 50.f);
+	explicit Bullet(float x = 0.f, float y = 0.f, float angularDirection = 50.f);
 	virtual ~Bullet();
 
 	bool isDead();

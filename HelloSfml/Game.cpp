@@ -8,10 +8,12 @@ Game::Game()
 	initWindow();
     this->player = Player((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
     this->spawnAsteroids();
+    this->userInterface = new UiManager(this->window);
 }
 
 Game::~Game() {
 	delete this->window;
+    delete this->userInterface;
 }
 
 const bool Game::isRunning() const
@@ -96,7 +98,7 @@ void Game::render()
     this->player.render(this->window);
     this->renderAsteroids(this->window);
     this->renderBullets(this->window);
-
+    this->userInterface->render(this->window);
     this->window->display();
 }
 
@@ -216,6 +218,9 @@ void Game::updateCollisions()
         else {
             if (asteroidIt->getGlobalBounds().intersects(this->player.getGlobalBounds()) && this->player.shouldUpdate()) {
                 this->looseHP();
+                if (this->hitPoint <= 0) {
+                    this->userInterface->display(UiManager::UiElementList::GameOver, true);
+                }
                 this->player.reset(window->getSize().x / 2.f, window->getSize().y / 2.f);
                 splitAsteroids(asteroidIt->getPosition(), asteroidIt->getSizeType());
                 this->player.respawn();
