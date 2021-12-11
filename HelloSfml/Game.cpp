@@ -86,6 +86,7 @@ void Game::update()
 {
     this->pollEvents();
     this->updateCollisions();
+
     if (this->hitPoint > 0)
     {
         this->player.update(this->window);
