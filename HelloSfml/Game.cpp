@@ -87,7 +87,10 @@ void Game::update()
     this->pollEvents();
     this->updateCollisions();
 
-    this->player.update(this->window);
+    if (this->hitPoint > 0)
+    {
+        this->player.update(this->window);
+    }
     this->updateAsteroids(this->window);
     this->updateBullets(this->window);
 }
@@ -95,7 +98,10 @@ void Game::render()
 {
     this->window->clear();
 
-    this->player.render(this->window);
+    if (this->hitPoint > 0)
+    {
+        this->player.render(this->window);
+    }
     this->renderAsteroids(this->window);
     this->renderBullets(this->window);
     this->userInterface->render(this->window);
