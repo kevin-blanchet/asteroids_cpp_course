@@ -21,6 +21,7 @@ public:
 	const sf::FloatRect getGlobalBounds() const;
 	const sf::Vector2f getPosition() const;
 	const Asteroid::SizeList getSizeType() const;
+	const int getPoints() const;
 
 	void update(const sf::RenderTarget* target);
 	void render(sf::RenderTarget* target);
@@ -30,6 +31,7 @@ private:
 	int angularDirection;
 	float moveSpeed;
 	float size;
+	int points;
 	Asteroid::SizeList sizeType;
 
 	void initVariables();

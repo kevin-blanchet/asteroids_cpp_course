@@ -33,6 +33,7 @@ private:
 	sf::Event ev;
 	bool endGame;
 	int hitPoint;
+	int score;
 
 	enum controlMap
 	{
@@ -60,6 +61,8 @@ private:
 
 	void winHP(int hp = 1);
 	void looseHP(int hp = 1);
+
+	void addPointsToScore(int points);
 
 	void renderAsteroids(sf::RenderTarget* target);
 	void renderBullets(sf::RenderTarget* target);

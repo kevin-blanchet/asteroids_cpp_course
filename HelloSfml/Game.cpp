@@ -219,6 +219,7 @@ void Game::updateCollisions()
         }
         if (isAsteroidDestroyed) {
             splitAsteroids(asteroidIt->getPosition(), asteroidIt->getSizeType());
+            this->addPointsToScore(asteroidIt->getPoints());
             asteroidIt = this->asteroids.erase(asteroidIt); //clarifications ?
         }
         else {
@@ -250,9 +251,12 @@ void Game::winHP(int hp)
 
 void Game::looseHP(int hp) {
     this->hitPoint -= hp;
-    std::cout << hitPoint;
+    std::cout << hitPoint << "\n";
+}
 
-    if (this->hitPoint <= 0)
-        std::cout << "youdie";
+void Game::addPointsToScore(int points)
+{
+    this->score += points;
+    std::cout << this->score << "\n";
 }
 
