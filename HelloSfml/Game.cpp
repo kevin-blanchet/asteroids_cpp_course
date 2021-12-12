@@ -115,6 +115,7 @@ void Game::initVariables()
 	this->window = nullptr;
     this->endGame = false;
     this->hitPoint = 4;
+    this->asteroidsRespawnTimer = 24;
 }
 
 void Game::initWindow()
@@ -165,6 +166,16 @@ void Game::renderBullets(sf::RenderTarget* target)
 
 void Game::updateAsteroids(const sf::RenderTarget* target)
 {
+    if (this->asteroids.size() == 0) {
+        if (this->asteroidsRespawnTimer <= 0) {
+            this->spawnAsteroids();
+            this->asteroidsRespawnTimer = 24;
+        }
+        else
+        {
+            this->asteroidsRespawnTimer--;
+        }
+    }
     for (auto& it : this->asteroids) {
         it.update(target);
     }
