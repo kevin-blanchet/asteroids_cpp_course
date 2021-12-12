@@ -34,6 +34,7 @@ private:
 	bool endGame;
 	int hitPoint;
 	int score;
+	int asteroidsRespawnTimer;
 
 	enum controlMap
 	{
