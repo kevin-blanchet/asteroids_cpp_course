@@ -8,6 +8,7 @@ UiManager::UiManager(const sf::RenderTarget* target)
 
 UiManager::~UiManager()
 {
+	this->deleteAllItemsFromShapeVector();
 	this->deleteAllItemsFromUiElementMap();
 }
 
@@ -49,6 +50,26 @@ void UiManager::changeString(UiManager::UiElementList element, std::string strin
 	this->update();
 }
 
+void UiManager::setShapeVectorLength(int length)
+{
+	if (length > this->shapeVector.size())
+	{
+		for (size_t i = this->shapeVector.size(); i < length; ++i)
+		{
+			sf::Shape* shape = new SpaceshipShape(5.f);
+			shape->setPosition({ (i + 1) * 20.f, 60.f });
+			this->shapeVector.push_back(shape);
+		}
+	}
+	else if (length < this->shapeVector.size()) {
+		while (length < this->shapeVector.size())
+		{
+			delete this->shapeVector.back();
+			this->shapeVector.pop_back();
+		}
+	}
+}
+
 void UiManager::display(UiManager::UiElementList uiElement, bool shouldDisplay)
 {
 	this->uiElementMap[uiElement]->display(shouldDisplay);
@@ -80,7 +101,7 @@ void UiManager::initUiElementMap(const sf::RenderTarget* target)
 	UiString* scoreUiString = new UiString(&this->scoreText);
 	scoreUiString->setCharacterSize(20);
 	scoreUiString->setFillColor(sf::Color::White);
-	scoreUiString->setPosition({ 20, 20 });
+	scoreUiString->setPosition({ 30.f, 30.f });
 	scoreUiString->display(true);
 	uiElementMap.insert({ UiManager::UiElementList::Score, scoreUiString });
 
@@ -90,8 +111,17 @@ void UiManager::initUiElementMap(const sf::RenderTarget* target)
 	gameOverUiString->setPosition({ target->getSize().x / 2.f, target->getSize().y / 2.f });
 	uiElementMap.insert({ UiManager::UiElementList::GameOver, gameOverUiString });
 
-	UiGraphic* hitPointUiGraphic = new UiGraphic();
+	UiGraphic* hitPointUiGraphic = new UiGraphic(&this->shapeVector);
+	hitPointUiGraphic->display(true);
 	uiElementMap.insert({ UiManager::UiElementList::HitPoints, hitPointUiGraphic });
+}
+
+void UiManager::deleteAllItemsFromShapeVector()
+{
+	for (auto& it : this->shapeVector)
+	{
+		delete it;
+	}
 }
 
 void UiManager::deleteAllItemsFromUiElementMap()

@@ -10,6 +10,7 @@ Game::Game()
     this->player = Player((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
     this->spawnAsteroids();
     this->userInterface = new UiManager(this->window);
+    this->userInterface->setShapeVectorLength(this->hitPoint);
 }
 
 Game::~Game() {
@@ -247,11 +248,13 @@ void Game::updateCollisions()
 void Game::winHP(int hp)
 {
     this->hitPoint += hp;
+    this->userInterface->setShapeVectorLength(this->hitPoint);
     std::cout << hitPoint;
 }
 
 void Game::looseHP(int hp) {
     this->hitPoint -= hp;
+    this->userInterface->setShapeVectorLength(this->hitPoint);
     std::cout << hitPoint << "\n";
 }
 

@@ -1,18 +1,15 @@
 #pragma once
 
 #include "UiElement.h"
-#include "SpaceshipShape.h"
 
 class UiGraphic :
     public UiElement
 {
 public:
-    UiGraphic();
+    UiGraphic(std::vector<sf::Shape*>* shapes);
 
-    void render(sf::RenderTarget* target);
+    virtual void render(sf::RenderTarget* target) override;
 private:
-    SpaceshipShape shape;
-
-    void initShape();
+    std::vector<sf::Shape*>* shapes;
 };
 

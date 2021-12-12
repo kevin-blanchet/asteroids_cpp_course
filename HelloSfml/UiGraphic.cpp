@@ -1,15 +1,14 @@
 #include "UiGraphic.h"
 
-UiGraphic::UiGraphic()
+UiGraphic::UiGraphic(std::vector<sf::Shape*>* shapes)
 {
-	this->initShape();
+	this->shapes = shapes;
 }
 
 void UiGraphic::render(sf::RenderTarget* target)
 {
-	target->draw(this->shape);
-}
-
-void UiGraphic::initShape()
-{
+	for (auto& i : *this->shapes)
+	{
+		target->draw(*i);
+	}
 }
