@@ -9,7 +9,7 @@ UiElement::~UiElement()
 {
 }
 
-void UiElement::update(const sf::RenderTarget* target)
+void UiElement::update()
 {
 }
 

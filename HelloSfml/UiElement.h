@@ -13,7 +13,7 @@ public:
 	UiElement();
 	~UiElement();
 
-	void update(const sf::RenderTarget* target);
+	virtual void update();
 	virtual void render(sf::RenderTarget* target) = 0;
 
 	void display(bool display);

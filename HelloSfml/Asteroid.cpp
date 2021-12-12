@@ -30,6 +30,11 @@ const Asteroid::SizeList Asteroid::getSizeType() const
 	return this->sizeType;
 }
 
+const int Asteroid::getPoints() const
+{
+	return this->points;
+}
+
 void Asteroid::updatePosition()
 {
 	float pi = 3.14159265f;
@@ -78,15 +83,18 @@ void Asteroid::initSize(Asteroid::SizeList sizeType)
 	case Asteroid::SizeList::small:
 		this->sizeType = sizeType;
 		this->size = 5.f;
+		this->points = 100;
 		break;
 	case Asteroid::SizeList::medium:
 		this->sizeType = sizeType;
 		this->size = 10.f;
+		this->points = 50;
 		break;
 	case Asteroid::SizeList::large:
 	default:
 		this->sizeType = Asteroid::SizeList::large;
 		this->size = 20.f;
+		this->points = 20;
 		break;
 	}
 }
