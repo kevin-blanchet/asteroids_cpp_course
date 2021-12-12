@@ -11,11 +11,11 @@ UiManager::~UiManager()
 	this->deleteAllItemsFromUiElementMap();
 }
 
-void UiManager::update(const sf::RenderTarget* target)
+void UiManager::update()
 {
 	for (auto& it : this->uiElementMap)
 	{
-		it.second->update(target);
+		it.second->update();
 	}
 }
 
@@ -27,6 +27,26 @@ void UiManager::render(sf::RenderTarget* target)
 			it.second->render(target);
 		}
 	}
+}
+
+void UiManager::changeString(UiManager::UiElementList element, std::string string)
+{
+	switch (element)
+	{
+	case UiManager::UiElementList::Start:
+		this->startText = string;
+		break;
+	case UiManager::UiElementList::Copyright:
+		this->copyrightText = string;
+		break;
+	case UiManager::UiElementList::Score:
+		this->scoreText = string;
+		break;
+	case UiManager::UiElementList::GameOver:
+		this->gameOverText = string;
+		break;
+	}
+	this->update();
 }
 
 void UiManager::display(UiManager::UiElementList uiElement, bool shouldDisplay)

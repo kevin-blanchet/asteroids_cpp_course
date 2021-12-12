@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include <iostream>
+#include <sstream>
 
 Game::Game()
 {
@@ -257,6 +258,9 @@ void Game::looseHP(int hp) {
 void Game::addPointsToScore(int points)
 {
     this->score += points;
+    std::stringstream ss;
+    ss << this->score;
+    this->userInterface->changeString(UiManager::UiElementList::Score, ss.str());
     std::cout << this->score << "\n";
 }
 

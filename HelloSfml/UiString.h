@@ -9,6 +9,7 @@ public:
 	UiString(std::string* textString);
 	~UiString();
 
+	virtual void update() override;
 	void render(sf::RenderTarget* target);
 
 	void setCharacterSize(unsigned int size);

@@ -25,8 +25,10 @@ class UiManager
 		UiManager(const sf::RenderTarget* target);
 		~UiManager();
 
-		void update(const sf::RenderTarget* target);
+		void update();
 		void render(sf::RenderTarget* target);
+
+		void changeString(UiManager::UiElementList element, std::string string);
 
 		void display(UiManager::UiElementList uiElement, bool shouldDisplay = true);
 
@@ -34,7 +36,6 @@ class UiManager
 		std::string startText;
 		std::string copyrightText;
 		std::string scoreText;
-		std::string hitPointsText;
 		std::string gameOverText;
 
 		std::map<UiManager::UiElementList, UiElement*> uiElementMap;

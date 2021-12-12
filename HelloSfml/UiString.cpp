@@ -12,6 +12,11 @@ UiString::~UiString()
 	delete this->textString;
 }
 
+void UiString::update()
+{
+	this->text.setString(*this->textString);
+}
+
 void UiString::render(sf::RenderTarget* target)
 {
 	target->draw(this->text);
