@@ -115,10 +115,6 @@ void Player::initShape()
 {
 	//this->shape.setPointCount(3);
 	this->shape.setSize(this->size);
-	this->shape.setScale({ 1.f, -1.f });
-	this->shape.setFillColor(sf::Color::Transparent);
-	this->shape.setOutlineColor(sf::Color::White);
-	this->shape.setOutlineThickness(1.f);
 }
 
 void Player::teleport(bool isPressed)

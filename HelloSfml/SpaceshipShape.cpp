@@ -3,6 +3,10 @@
 SpaceshipShape::SpaceshipShape(float size)
 {
     this->size = size;
+    this->setFillColor(sf::Color::Transparent);
+    this->setOutlineColor(sf::Color::White);
+    this->setOutlineThickness(1.f);
+    this->setScale({ 1.f, -1.f });
     update();
 }
 
