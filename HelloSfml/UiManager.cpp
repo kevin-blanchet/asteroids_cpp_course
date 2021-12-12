@@ -81,8 +81,6 @@ void UiManager::initVariables()
 	this->copyrightText = "© YNOV 2021";
 	this->scoreText = "00";
 	this->gameOverText = "GAME OVER";
-
-	this->setShapeVectorLength(4);
 }
 
 void UiManager::initUiElementMap(const sf::RenderTarget* target)

@@ -10,6 +10,7 @@ Game::Game()
     this->player = Player((1.f * window->getSize().x) / 2, (1.f * window->getSize().y) / 2);
     this->spawnAsteroids();
     this->userInterface = new UiManager(this->window);
+    this->userInterface->setShapeVectorLength(this->hitPoint);
 }
 
 Game::~Game() {
