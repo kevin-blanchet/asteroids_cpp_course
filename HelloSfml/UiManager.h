@@ -9,6 +9,7 @@
 
 #include "UiString.h"
 #include "UiGraphic.h"
+#include "SpaceshipShape.h"
 
 class UiManager
 {
@@ -29,6 +30,7 @@ class UiManager
 		void render(sf::RenderTarget* target);
 
 		void changeString(UiManager::UiElementList element, std::string string);
+		void setShapeVectorLength(int length);
 
 		void display(UiManager::UiElementList uiElement, bool shouldDisplay = true);
 
@@ -38,10 +40,13 @@ class UiManager
 		std::string scoreText;
 		std::string gameOverText;
 
+		std::vector<sf::Shape*> shapeVector;
+
 		std::map<UiManager::UiElementList, UiElement*> uiElementMap;
 
 		void initVariables();
 		void initUiElementMap(const sf::RenderTarget* target);
 
+		void deleteAllItemsFromShapeVector();
 		void deleteAllItemsFromUiElementMap();
 };

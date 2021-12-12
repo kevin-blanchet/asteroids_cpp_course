@@ -247,11 +247,13 @@ void Game::updateCollisions()
 void Game::winHP(int hp)
 {
     this->hitPoint += hp;
+    this->userInterface->setShapeVectorLength(this->hitPoint);
     std::cout << hitPoint;
 }
 
 void Game::looseHP(int hp) {
     this->hitPoint -= hp;
+    this->userInterface->setShapeVectorLength(this->hitPoint);
     std::cout << hitPoint << "\n";
 }
 
